@@ -1,2 +1,13 @@
+# IntelliJ IDEA
 .idea/
 *.iml
+*.iws
+
+# Build folders (Maven/Gradle)
+target/
+build/
+.gradle/
+
+# OS junk
+.DS_Store
+Thumbs.db
