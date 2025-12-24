@@ -11,6 +11,12 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE
 )
 public interface WeeklyAttendanceMapper {
-    @Mapping(target = "status", source = "weeklyAttendance.status.toString")
+    @Mapping(target = "status", source = "status")
     WeeklyAttendanceResponse toResponse(WeeklyAttendance weeklyAttendance);
+
+    @Mapping(target = "isPresent", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    WeeklyAttendance toEntity(Long profileId, int week, int year);
 }

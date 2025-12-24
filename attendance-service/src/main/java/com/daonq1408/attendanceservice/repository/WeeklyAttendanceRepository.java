@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface WeeklyAttendanceRepository extends JpaRepository<WeeklyAttendance, Long>,
         JpaSpecificationExecutor<WeeklyAttendance> {
+    boolean existsByProfileIdAndWeekAndYear(Long id, int week, int year);
 }
