@@ -1,9 +1,9 @@
 server:
-  port: 8761
+  port: ${PORT}
 
 spring:
   application:
-    name: discovery-service
+    name: ${APPLICATION_NAME}
 
 eureka:
   client:

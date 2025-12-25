@@ -1,27 +1,31 @@
 package com.daonq1408.memberservice.entity;
 
-import com.daonq1408.memberservice.enums.ProfileStatus;
+import com.daonq1408.memberservice.enums.ScoutElementStatus;
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_profiles")
+@Table(name = "permissions")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class Permission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "mail", nullable = false, unique = true)
-    String mail;
+    @Column(name = "name", nullable = false, length = 50)
+    String name;
+
+    @Column(name = "description")
+    String description;
 
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
@@ -31,12 +35,12 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    ProfileStatus status;
+    ScoutElementStatus status;
 
     @PrePersist
     public void onCreate() {
         if (status == null) {
-            status = ProfileStatus.ACTIVE;
+            status = ScoutElementStatus.ACTIVE;
         }
         createdAt = LocalDateTime.now();
         updatedAt = createdAt;

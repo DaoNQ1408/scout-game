@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: ${PORT}
 
 spring:
   application:
-    name: api-gateway
+    name: ${APPLICATION_NAME}
   cloud:
     gateway:
       discovery:
@@ -28,4 +28,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_SERVER_URL}
