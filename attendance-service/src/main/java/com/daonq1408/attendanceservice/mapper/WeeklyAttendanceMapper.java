@@ -14,7 +14,8 @@ public interface WeeklyAttendanceMapper {
     @Mapping(target = "status", source = "status")
     WeeklyAttendanceResponse toResponse(WeeklyAttendance weeklyAttendance);
 
-    @Mapping(target = "isPresent", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "isPresent", constant = "false")
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)

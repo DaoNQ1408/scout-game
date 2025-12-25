@@ -1,6 +1,7 @@
 package com.daonq1408.attendanceservice.service.impl;
 
 import com.daonq1408.attendanceservice.client.ScoutProfileClient;
+import com.daonq1408.attendanceservice.dto.filter.AttendanceFilterRequest;
 import com.daonq1408.attendanceservice.dto.request.WeeklyAttendanceRequest;
 import com.daonq1408.attendanceservice.dto.response.WeeklyAttendanceResponse;
 import com.daonq1408.attendanceservice.entity.WeeklyAttendance;
@@ -11,6 +12,8 @@ import com.daonq1408.attendanceservice.service.inter.WeeklyAttendanceService;
 import com.daonq1408.attendanceservice.specification.WeeklyAttendanceSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,32 +59,11 @@ public class WeeklyAttendanceServiceImpl implements WeeklyAttendanceService {
 
 
     @Override
-    public List<WeeklyAttendanceResponse> getByFilter(
-            Long id,
-            Long profileId,
-            Integer week,
-            Integer year,
-            Boolean isPresent,
-            AttendanceStatus status,
-            LocalDateTime fromDate,
-            LocalDateTime toDate
-    ) {
-        return weekAttendanceRepository
-                .findAll(
-                        WeeklyAttendanceSpecification.filter(
-                                id,
-                                profileId,
-                                week,
-                                year,
-                                isPresent,
-                                status,
-                                fromDate,
-                                toDate
-                        )
-                )
-                .stream()
-                .map(weekAttendanceMapper::toResponse)
-                .toList();
+    public Page<WeeklyAttendanceResponse> getByFilter(AttendanceFilterRequest attendanceFilterRequest, Pageable pageable) {
+        return weekAttendanceRepository.findAll(
+                WeeklyAttendanceSpecification.filter(attendanceFilterRequest),
+                pageable
+        ).map(weekAttendanceMapper::toResponse);
     }
 
 

@@ -1,17 +1,17 @@
 package com.daonq1408.attendanceservice.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class WeeklyAttendanceResponse {
-    private long id;
-    private long profileId;
-    private int week;
-    private int year;
-    private boolean isPresent;
-    private String status;
+    long id;
+    long profileId;
+    int week;
+    int year;
+    boolean isPresent;
+    String status;
 }

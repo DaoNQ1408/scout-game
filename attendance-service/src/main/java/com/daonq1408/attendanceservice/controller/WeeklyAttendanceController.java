@@ -1,11 +1,17 @@
 package com.daonq1408.attendanceservice.controller;
 
+import com.daonq1408.attendanceservice.dto.api.ApiResponse;
+import com.daonq1408.attendanceservice.dto.api.PageMeta;
+import com.daonq1408.attendanceservice.dto.filter.AttendanceFilterRequest;
 import com.daonq1408.attendanceservice.dto.request.WeeklyAttendanceRequest;
 import com.daonq1408.attendanceservice.dto.response.WeeklyAttendanceResponse;
-import com.daonq1408.attendanceservice.enums.AttendanceStatus;
 import com.daonq1408.attendanceservice.service.inter.WeeklyAttendanceService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,39 +26,37 @@ public class WeeklyAttendanceController {
 
 
     @PostMapping("/take-attendance")
-    public List<WeeklyAttendanceResponse> takeAttendance(
+    public ApiResponse<List<WeeklyAttendanceResponse>> takeAttendance(
             @RequestBody List<WeeklyAttendanceRequest> requests
     ) {
-        return weeklyAttendanceService.takeAttendance(requests);
+        List<WeeklyAttendanceResponse> responses = weeklyAttendanceService.takeAttendance(requests);
+
+        return ApiResponse.success(
+                HttpStatus.OK,
+                "Take attendance successfully: " + responses.size() + " records.",
+                responses,
+                null);
     }
 
 
     @GetMapping
-    public List<WeeklyAttendanceResponse> getByFilter(
-            @RequestParam(required = false) Long id,
-            @RequestParam(required = false) Long profileId,
-            @RequestParam(required = false) Integer week,
-            @RequestParam(required = false) Integer year,
-            @RequestParam(required = false) Boolean isPresent,
-            @RequestParam(required = false) AttendanceStatus status,
-
-            @RequestParam(required = false)
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-            LocalDateTime fromDate,
-
-            @RequestParam(required = false)
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-            LocalDateTime toDate
+    public ApiResponse<List<WeeklyAttendanceResponse>> getByFilter(
+            @ModelAttribute AttendanceFilterRequest attendanceFilterRequest,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        return weeklyAttendanceService.getByFilter(
-                id,
-                profileId,
-                week,
-                year,
-                isPresent,
-                status,
-                fromDate,
-                toDate
-        );
+        Page<WeeklyAttendanceResponse> responses = weeklyAttendanceService.getByFilter(attendanceFilterRequest, pageable);
+
+        PageMeta meta = PageMeta.builder()
+                .currentPage(responses.getNumber() + 1) // +1 vì Spring tính từ 0
+                .size(responses.getSize())
+                .lastPage(responses.getTotalPages())
+                .totalElements(responses.getTotalElements()) // Nên thêm cái này
+                .build();
+
+        return ApiResponse.success(
+                HttpStatus.OK,
+                "Get weekly attendance by filter successfully: " + meta.getTotalElements() + " records.",
+                responses.getContent(),
+                meta);
     }
 }

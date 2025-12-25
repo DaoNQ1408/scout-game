@@ -1,13 +1,13 @@
 package com.daonq1408.attendanceservice.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class WeeklyAttendanceRequest {
-    private long id;
-    private boolean isPresent;
+    long id;
+    boolean isPresent;
 }
