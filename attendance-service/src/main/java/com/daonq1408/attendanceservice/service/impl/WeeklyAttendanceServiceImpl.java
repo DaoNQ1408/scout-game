@@ -59,9 +59,9 @@ public class WeeklyAttendanceServiceImpl implements WeeklyAttendanceService {
 
 
     @Override
-    public Page<WeeklyAttendanceResponse> getByFilter(AttendanceFilterRequest attendanceFilterRequest, Pageable pageable) {
+    public Page<WeeklyAttendanceResponse> getByFilter(AttendanceFilterRequest filterRequest, Pageable pageable) {
         return weekAttendanceRepository.findAll(
-                WeeklyAttendanceSpecification.filter(attendanceFilterRequest),
+                WeeklyAttendanceSpecification.filter(filterRequest),
                 pageable
         ).map(weekAttendanceMapper::toResponse);
     }

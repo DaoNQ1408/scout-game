@@ -2,44 +2,41 @@ package com.daonq1408.attendanceservice.specification;
 
 import com.daonq1408.attendanceservice.dto.filter.AttendanceFilterRequest;
 import com.daonq1408.attendanceservice.entity.WeeklyAttendance;
-import com.daonq1408.attendanceservice.enums.AttendanceStatus;
 import jakarta.persistence.criteria.Predicate;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyAttendanceSpecification {
-    public static Specification<WeeklyAttendance> filter(AttendanceFilterRequest filterRequest) {
+    public static Specification<WeeklyAttendance> filter(AttendanceFilterRequest request) {
         return (root, query, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
 
-            if (filterRequest.getId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("id"), filterRequest.getId()));
+            if (request.getId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("id"), request.getId()));
             }
-            if (filterRequest.getProfileId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("profileId"), filterRequest.getProfileId()));
+            if (request.getProfileId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("profileId"), request.getProfileId()));
             }
-            if (filterRequest.getWeek() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("week"), filterRequest.getWeek()));
+            if (request.getWeek() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("week"), request.getWeek()));
             }
-            if (filterRequest.getYear() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("year"), filterRequest.getYear()));
+            if (request.getYear() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("year"), request.getYear()));
             }
-            if (filterRequest.getIsPresent() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("isPresent"), filterRequest.getIsPresent()));
+            if (request.getIsPresent() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("isPresent"), request.getIsPresent()));
             }
-            if (filterRequest.getStatus() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("status"), filterRequest.getStatus()));
+            if (request.getStatus() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("status"), request.getStatus()));
             }
-            if (filterRequest.getFromDate() != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"), filterRequest.getFromDate()));
+            if (request.getFromDate() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"), request.getFromDate()));
             }
-            if (filterRequest.getToDate() != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"), filterRequest.getToDate()));
+            if (request.getToDate() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"), request.getToDate()));
             }
 
             query.distinct(true);

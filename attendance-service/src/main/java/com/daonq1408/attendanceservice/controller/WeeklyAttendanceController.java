@@ -14,7 +14,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -44,18 +43,19 @@ public class WeeklyAttendanceController {
             @ModelAttribute AttendanceFilterRequest attendanceFilterRequest,
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ) {
+
         Page<WeeklyAttendanceResponse> responses = weeklyAttendanceService.getByFilter(attendanceFilterRequest, pageable);
 
         PageMeta meta = PageMeta.builder()
-                .currentPage(responses.getNumber() + 1) // +1 vì Spring tính từ 0
+                .currentPage(responses.getNumber() + 1)
                 .size(responses.getSize())
                 .lastPage(responses.getTotalPages())
-                .totalElements(responses.getTotalElements()) // Nên thêm cái này
+                .totalElements(responses.getTotalElements())
                 .build();
 
         return ApiResponse.success(
                 HttpStatus.OK,
-                "Get weekly attendance by filter successfully: " + meta.getTotalElements() + " records.",
+                "Get weekly attendance by filter successfully: " + responses.getTotalElements() + " records.",
                 responses.getContent(),
                 meta);
     }
