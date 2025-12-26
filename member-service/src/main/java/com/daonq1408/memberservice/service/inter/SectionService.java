@@ -1,16 +1,15 @@
 package com.daonq1408.memberservice.service.inter;
 
 import com.daonq1408.memberservice.dto.request.SectionRequest;
+import com.daonq1408.memberservice.dto.request.filter.SectionRequestFilter;
 import com.daonq1408.memberservice.entity.Section;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface SectionService {
     Section createSection(SectionRequest sectionRequest);
 
-    List<Section> getByFilter(Long id,
-                              String name,
-                              String code);
+    Page<Section> getByFilter(SectionRequestFilter filter, Pageable pageable);
 
     Section updateSection(Long id, SectionRequest sectionRequest);
 
