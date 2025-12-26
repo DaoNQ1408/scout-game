@@ -44,9 +44,6 @@ public class Section { // ngành
     @Column(name = "status", nullable = false)
     ScoutElementStatus status;
 
-    @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
-    List<Rank> ranks;
-
     @PrePersist
     public void onCreate() {
         if (status == null) {

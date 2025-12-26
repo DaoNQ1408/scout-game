@@ -42,6 +42,10 @@ public class Badge { // chuyên hiệu, năng hiệu
     @Column(name = "status", nullable = false)
     ScoutElementStatus status;
 
+    @ManyToOne
+    @JoinColumn(name = "section_id", nullable = false)
+    Section section;
+
     @PrePersist
     public void onCreate() {
         if (status == null) {

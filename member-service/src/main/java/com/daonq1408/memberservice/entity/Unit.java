@@ -1,6 +1,7 @@
 package com.daonq1408.memberservice.entity;
 
 import com.daonq1408.memberservice.enums.ScoutElementStatus;
+import com.daonq1408.memberservice.enums.UnitLevel;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -41,6 +42,18 @@ public class Unit { // đơn vị
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     ScoutElementStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    Section section;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    Unit parent;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "level", nullable = false)
+    UnitLevel level;
 
     @PrePersist
     public void onCreate() {
