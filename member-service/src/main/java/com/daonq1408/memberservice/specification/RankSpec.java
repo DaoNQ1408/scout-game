@@ -1,19 +1,24 @@
 package com.daonq1408.memberservice.specification;
 
-import com.daonq1408.memberservice.dto.request.filter.SectionRequestFilter;
+import com.daonq1408.memberservice.dto.request.filter.RankRequestFilter;
+import com.daonq1408.memberservice.entity.Rank;
 import com.daonq1408.memberservice.entity.Section;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SectionSpec {
+public class RankSpec {
 
-    public static Specification<Section> filter(SectionRequestFilter filter) {
+    public static Specification<Rank> filter(RankRequestFilter filter) {
         return (root, query, cb) -> {
 
             List<Predicate> predicates = new ArrayList<>();
+
+            Join<Rank, Section> sectionJoin = root.join("section", JoinType.INNER);
 
             if (filter.getId() != null) {
                 predicates.add(cb.equal(root.get("id"), filter.getId()));
@@ -26,6 +31,9 @@ public class SectionSpec {
             }
             if (filter.getStatus() != null) {
                 predicates.add(cb.equal(root.get("status"), filter.getStatus()));
+            }
+            if (filter.getSectionId() != null) {
+                predicates.add(cb.equal(sectionJoin.get("id"), filter.getSectionId()));
             }
 
             query.distinct(true);

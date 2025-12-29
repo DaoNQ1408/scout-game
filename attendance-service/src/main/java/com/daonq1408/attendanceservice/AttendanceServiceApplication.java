@@ -1,6 +1,5 @@
 package com.daonq1408.attendanceservice;
 
-import com.daonq1408.attendanceservice.client.ScoutProfileClient;
 import com.daonq1408.attendanceservice.config.DotEnvConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

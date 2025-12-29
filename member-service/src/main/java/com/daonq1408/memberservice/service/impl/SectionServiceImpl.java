@@ -48,6 +48,15 @@ public class SectionServiceImpl implements SectionService {
 
 
     @Override
+    public Section getById(Long id) {
+        return sectionRepository.findById(id)
+                .orElseThrow(
+                        () -> new RuntimeException("Section not found")
+                );
+    }
+
+
+    @Override
     @Transactional
     public SectionResponse updateSection(Long id, SectionRequest sectionRequest) {
 
