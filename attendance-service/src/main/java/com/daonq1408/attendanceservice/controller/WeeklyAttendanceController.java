@@ -57,6 +57,7 @@ public class WeeklyAttendanceController {
                 HttpStatus.OK,
                 "Get weekly attendance by filter successfully: " + responses.getTotalElements() + " records.",
                 responses.getContent(),
-                meta);
+                meta
+        );
     }
 }

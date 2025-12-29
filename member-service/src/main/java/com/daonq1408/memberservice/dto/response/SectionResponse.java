@@ -3,6 +3,8 @@ package com.daonq1408.memberservice.dto.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,4 +15,5 @@ public class SectionResponse {
     String description;
     String code;
     String name;
+    LocalDateTime updatedAt;
 }
