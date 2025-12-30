@@ -1,6 +1,7 @@
 package com.daonq1408.memberservice.dto.request.filter;
 
 import com.daonq1408.memberservice.enums.ScoutElementStatus;
+import com.daonq1408.memberservice.enums.UnitLevel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,5 +17,7 @@ public class UnitRequestFilter {
     String name;
     String code;
     Long sectionId;
+    Long parentUnitId;
     ScoutElementStatus status;
+    UnitLevel level;
 }

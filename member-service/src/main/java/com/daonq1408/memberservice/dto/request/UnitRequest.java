@@ -1,5 +1,6 @@
 package com.daonq1408.memberservice.dto.request;
 
+import com.daonq1408.memberservice.enums.UnitLevel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,4 +18,5 @@ public class UnitRequest {
     String description;
     long sectionId;
     Long parentUnitId;
+    UnitLevel unitLevel;
 }
