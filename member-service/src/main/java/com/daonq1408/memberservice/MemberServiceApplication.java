@@ -11,5 +11,4 @@ public class MemberServiceApplication {
         DotEnvConfig.loadEnv();
         SpringApplication.run(MemberServiceApplication.class, args);
     }
-
 }

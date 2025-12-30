@@ -15,5 +15,5 @@ public class BadgeRequest {
     String code;
     String imageUrl;
     String description;
-    Long sectionId;
+    long sectionId;
 }
