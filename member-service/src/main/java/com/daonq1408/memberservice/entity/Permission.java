@@ -1,5 +1,7 @@
 package com.daonq1408.memberservice.entity;
 
+import com.daonq1408.memberservice.enums.PermissionAction;
+import com.daonq1408.memberservice.enums.PermissionObject;
 import com.daonq1408.memberservice.enums.ScoutElementStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,6 +38,14 @@ public class Permission {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     ScoutElementStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "action", nullable = false)
+    PermissionAction action;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "object", nullable = false)
+    PermissionObject object;
 
     @PrePersist
     public void onCreate() {

@@ -22,12 +22,14 @@ public interface BadgeMapper {
     @Mapping(target = "section", source = "section")
     Badge toEntity(BadgeRequest request, Section section);
 
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "section", source = "section")
     Badge updateBadgeFromRequest(BadgeRequest request, Section section, @MappingTarget Badge badge);
+
 
     BadgeResponse toBadgeResponse(Badge badge);
 }

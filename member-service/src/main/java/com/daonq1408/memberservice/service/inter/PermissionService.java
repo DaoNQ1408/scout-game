@@ -1,18 +1,17 @@
 package com.daonq1408.memberservice.service.inter;
 
-import com.daonq1408.memberservice.dto.request.PermissionRequest;
 import com.daonq1408.memberservice.dto.request.filter.PermissionRequestFilter;
+import com.daonq1408.memberservice.dto.response.PermissionResponse;
 import com.daonq1408.memberservice.entity.Permission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface PermissionService {
+    Page<PermissionResponse> getByFilter(PermissionRequestFilter filter, Pageable pageable);
 
-    Permission createPermission(PermissionRequest request);
+    Permission getById(Long id);
 
-    Page<Permission> getByFilter(PermissionRequestFilter filter, Pageable pageable);
-
-    Permission updatePermission(Long id, PermissionRequest request);
-
-    Permission deletePermission(Long id);
+    List<Permission> findAllByIds(List<Long> ids);
 }

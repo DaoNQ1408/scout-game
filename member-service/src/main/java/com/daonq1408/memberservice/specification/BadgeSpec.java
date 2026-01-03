@@ -1,9 +1,7 @@
 package com.daonq1408.memberservice.specification;
 
 import com.daonq1408.memberservice.dto.request.filter.BadgeRequestFilter;
-import com.daonq1408.memberservice.dto.request.filter.RankRequestFilter;
 import com.daonq1408.memberservice.entity.Badge;
-import com.daonq1408.memberservice.entity.Rank;
 import com.daonq1408.memberservice.entity.Section;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;

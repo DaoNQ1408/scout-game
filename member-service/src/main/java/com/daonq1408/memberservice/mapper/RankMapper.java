@@ -22,12 +22,14 @@ public interface RankMapper {
     @Mapping(target = "section", source = "section")
     Rank toEntity(RankRequest rankRequest, Section section);
 
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "section", source = "section")
     Rank updateRankFromRequest(RankRequest rankRequest, Section section, @MappingTarget Rank rank);
+
 
     RankResponse toResponse(Rank rank);
 }
