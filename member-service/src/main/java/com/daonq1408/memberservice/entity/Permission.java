@@ -4,10 +4,8 @@ import com.daonq1408.memberservice.enums.PermissionAction;
 import com.daonq1408.memberservice.enums.PermissionObject;
 import com.daonq1408.memberservice.enums.ScoutElementStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Permission {
 
     @Id
