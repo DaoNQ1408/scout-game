@@ -20,9 +20,6 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "image_url")
-    String imageUrl;
-
     @Column(name = "title", nullable = false)
     String title;
 

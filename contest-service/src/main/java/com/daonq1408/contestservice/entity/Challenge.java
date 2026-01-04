@@ -26,9 +26,6 @@ public class Challenge {
     @Column(name = "description", columnDefinition = "TEXT")
     String description;
 
-    @Column(name = "count_in_season", nullable = false)
-    Integer countInSeason;
-
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
 
