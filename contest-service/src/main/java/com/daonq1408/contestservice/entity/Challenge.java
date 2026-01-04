@@ -8,32 +8,26 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "seasons")
+@Table(name = "challenges")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Season {
+public class Challenge {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "image_url")
-    String imageUrl;
-
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     String title;
 
     @Column(name = "description", columnDefinition = "TEXT")
     String description;
 
-    @Column(name = "start_date", nullable = false)
-    LocalDateTime startDate;
-
-    @Column(name = "end_date", nullable = false)
-    LocalDateTime endDate;
+    @Column(name = "count_in_season", nullable = false)
+    Integer countInSeason;
 
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
@@ -44,6 +38,13 @@ public class Season {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "contest_id", nullable = false)
+    Contest contest;
+
+    @Column(name = "rank_id", nullable = false)
+    Long rankId;
 
     @PrePersist
     public void onCreate() {
@@ -58,4 +59,5 @@ public class Season {
     public void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
 }

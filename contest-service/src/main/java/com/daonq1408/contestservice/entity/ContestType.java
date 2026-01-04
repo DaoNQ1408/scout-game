@@ -1,5 +1,6 @@
 package com.daonq1408.contestservice.entity;
 
+import com.daonq1408.contestservice.enums.ContestCycle;
 import com.daonq1408.contestservice.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,38 +9,30 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "seasons")
+@Table(name = "contest_types")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Season {
+public class ContestType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "image_url")
-    String imageUrl;
-
-    @Column(name = "title", nullable = false)
-    String title;
-
     @Column(name = "description", columnDefinition = "TEXT")
     String description;
-
-    @Column(name = "start_date", nullable = false)
-    LocalDateTime startDate;
-
-    @Column(name = "end_date", nullable = false)
-    LocalDateTime endDate;
 
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
     LocalDateTime updatedAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "cycle", nullable = false)
+    ContestCycle cycle;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

@@ -8,32 +8,25 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "seasons")
+@Table(
+        name = "season_type_points",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_type_point_per_season",
+                        columnNames = {"season_id", "contest_type_id"}
+                )
+        }
+)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Season {
+public class SeasonTypePoint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    @Column(name = "image_url")
-    String imageUrl;
-
-    @Column(name = "title", nullable = false)
-    String title;
-
-    @Column(name = "description", columnDefinition = "TEXT")
-    String description;
-
-    @Column(name = "start_date", nullable = false)
-    LocalDateTime startDate;
-
-    @Column(name = "end_date", nullable = false)
-    LocalDateTime endDate;
 
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
@@ -44,6 +37,14 @@ public class Season {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "season_id", nullable = false)
+    Season season;
+
+    @ManyToOne
+    @JoinColumn(name = "contest_type_id", nullable = false)
+    ContestType type;
 
     @PrePersist
     public void onCreate() {
